@@ -1,0 +1,54 @@
+{
+  "env": {
+    "browser": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "corejs": {
+              "version": 3,
+              "proposals": true
+            },
+            "useBuiltIns": "usage",
+            "targets": "defaults"
+          }
+        ]
+      ],
+      "plugins": [
+        [
+          "module-resolver",
+          {
+            "alias": {
+              "hyperswarm": "hyperswarm-web",
+              "util": "./node_modules/util/util.js"
+            }
+          }
+        ]
+      ]
+    },
+    "browserify": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "esmodules": true
+            },
+            "modules": "auto"
+          }
+        ]
+      ],
+      "plugins": [
+        [
+          "module-resolver",
+          {
+            "alias": {
+              "hyperswarm": "hyperswarm-web",
+              "util": "./node_modules/util/util.js"
+            }
+          }
+        ]
+      ]
+    }
+  }
+}
