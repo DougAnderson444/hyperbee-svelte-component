@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build:browserify": "cross-env BABEL_ENV=browserify browserify -t [ babelify --global --ignore [ test ] ] --standalone gethyperbee ./src/hyperbee.js > ./src/hyperbee-bundle.js",
-    "build": "rollup -c",
+    "build": "npm run build:browserify && rollup -c",
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
@@ -39,5 +39,6 @@
     "hyperbee"
   ],
   "license": "MIT",
-  "author": "Doug S Anderson"
+  "author": "Doug S Anderson",
+  "repository": "https://github.com/DougAnderson444/hyperbee-svelte-component.git"
 }

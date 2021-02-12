@@ -7590,7 +7590,9 @@ function _getHyperbee() {
     var config = {};
     if (opts.keyEncoding) config.keyEncoding = opts.keyEncoding;
     if (opts.valueEncoding) config.valueEncoding = opts.valueEncoding;
-    return new Hyperbee(opts.feed, config);
+    var hyperbeeDb = new Hyperbee(opts.feed, config);
+    yield hyperbeeDb.ready();
+    return hyperbeeDb;
   });
   return _getHyperbee.apply(this, arguments);
 }

@@ -3,11 +3,20 @@
 	// import { default as HyperbeeComponent } from "../../";
 	import HyperbeeComponent from "hyperbee-svelte-component";
 
-	onMount(async () => {});
+	let db;
+	let opts = { keyEncoding: "utf-8", valueEncoding: "utf-8" };
+	let feed;
+	let display = true; // if you want to debug the component, default: false
+
+	onMount(async () => {
+		feed = store.get({ key }); // get a hypercore feed from a corestore or hyperspace instance
+	});
 </script>
 
 <main>
-	<HyperbeeComponent {feed} {opts} {db} />
+	{#if feed}
+		<HyperbeeComponent {feed} {opts} {display} bind:db />
+	{/if}
 </main>
 
 <style>

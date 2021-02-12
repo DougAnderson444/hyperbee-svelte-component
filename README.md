@@ -9,54 +9,37 @@ Hyperbee bundled into a Svelte Component for use in the browser or other bundler
 ```html
 
 <script>
-    import Hyperbee from "hyperbee-svelte-component";
+	import { onMount } from "svelte";
+	import HyperbeeComponent from "hyperbee-svelte-component";
 
-    //stores
-    import {
-        hyperprotocolNode 
-        // any node that has a corestore and corestore-networker available to it
-        // the author uses hypnsNode from 
-    } from "../js/stores.js";
+	let db
+	let opts = { keyEncoding: "utf-8", valueEncoding: "utf-8" };
+  	let feed;
+	let display = true; // if you want to debug the component, default: false
 
-    let feed;
-    let display = true; // if you want to display the verbose; defaults to false
-
-    $: hyperprotocolNode ? open() : null;
-
-    const open = async () => {
-        feed = $hyperprotocolNode.store.get({ name: "some-random-feed-name" });
-        await feed.ready();
-        $hyperprotocolNode.swarmNetworker.configure(feed.discoveryKey, {
-            announce: true,
-            lookup: true,
-        });
-    };
+	onMount(async () => {
+		feed = store.get({ key }); // get a hypercore feed from a corestore or hyperspace instance
+	});
 </script>
 
-{#if feed}
-    <Hyperbee {feed} {display} />
-{:else}
-    No feed of bee yet.
-{/if}
+<main>
+	{#if feed}
+    	<HyperbeeComponent {feed} {opts} {display} bind:db />
+  	{/if}
+</main>
+
 
 ```
 
 # Building
-
-## Step 1
-
-Bundle with browserify (can't get rollup to do it)
-
-```
-npm run build:browserify
-```
-
-This bundles all the `require('hyperbee')` for you.
-
-## Step 2
 
 Run rollup to build the component
 
 ```
 npm run build
 ```
+
+Under the hood it bundles with browserify first (can't get rollup to do it right due to cjs?)
+
+This bundles all the `require('hyperbee')` for you and rolls it into the component.
+
