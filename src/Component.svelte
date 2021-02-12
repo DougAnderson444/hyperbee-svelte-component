@@ -4,10 +4,12 @@
 
     export let feed; // put in feed
     export let db; // get db out
+    export let opts = {}; // get db out
     export let display = false;
 
     onMount(async () => {
-        db = getHyperbee({ feed });
+        const hyperbeeDb = await getHyperbee({ feed, opts });
+        db = hyperbeeDb;
     });
 </script>
 
