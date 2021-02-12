@@ -6,8 +6,9 @@ async function getHyperbee (opts = {}) {
   const config = {}
   if (opts.keyEncoding) config.keyEncoding = opts.keyEncoding
   if (opts.valueEncoding) config.valueEncoding = opts.valueEncoding
-
-  return new Hyperbee(opts.feed, config)
+  const hyperbeeDb = new Hyperbee(opts.feed, config)
+  await hyperbeeDb.ready()
+  return hyperbeeDb
 }
 
 module.exports = getHyperbee
