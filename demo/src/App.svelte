@@ -7,7 +7,7 @@
 </script>
 
 <main>
-	<HyperbeeComponent {feed} />
+	<HyperbeeComponent {feed} {opts} {db} />
 </main>
 
 <style>
